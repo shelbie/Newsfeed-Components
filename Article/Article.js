@@ -101,32 +101,54 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
  */ 
+
+function articleComponentCreator(articleTitle, articleDate, firstP, secondP, thirdP){
+
 let article = document.createElement('div');
-article.classList.add('article')
+article.classList.add('article');
 
 let title = document.createElement('h2');
-//title.textContent = title of the article;
+title.textContent = articleTitle;
 article.appendChild(title);
 
 let date = document.createElement('p');
 date.classList.add('date');
-//date.textContent = {date of the article};
+date.textContent = articleDate;
 article.appendChild(date);
 
 let p1 = document.createElement('p');
-date.appendChild(p1);
+article.appendChild(p1);
+p1.textContent = firstP;
 
-let p1 = document.createElement('p');
-date.appendChild(p2);
+let p2 = document.createElement('p');
+article.appendChild(p2);
+p2.textContent = secondP;
 
-let p1 = document.createElement('p');
-date.appendChild(p3);
+let p3 = document.createElement('p');
+article.appendChild(p3);
+p3.textContent = thirdP;
 
 
 let expandButton = document.createElement('span');
 expandButton.classList.add('expandButton');
+
+
+expandButton.addEventListener('click', (event) => {
+  article.classList.toggle('article-open');
+})
 article.appendChild(expandButton);
 
+
+return article;
+} 
+
+const articleContainer = document.querySelector('.articles');
+
+
+data.forEach((obj) => {
+  const articleComponent = articleComponentCreator(obj.title, obj.date, obj.firstParagraph, obj.secondParagraph, obj.thirdParagraph);
+  articleContainer.appendChild(articleComponent);
+})
 
 /*
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
