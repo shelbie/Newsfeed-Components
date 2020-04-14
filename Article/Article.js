@@ -100,7 +100,35 @@ const data = [
   </div>
 
   Hint: You will need to use createElement more than once here!
+ */ 
+let article = document.createElement('div');
+article.classList.add('article')
 
+let title = document.createElement('h2');
+//title.textContent = title of the article;
+article.appendChild(title);
+
+let date = document.createElement('p');
+date.classList.add('date');
+//date.textContent = {date of the article};
+article.appendChild(date);
+
+let p1 = document.createElement('p');
+date.appendChild(p1);
+
+let p1 = document.createElement('p');
+date.appendChild(p2);
+
+let p1 = document.createElement('p');
+date.appendChild(p3);
+
+
+let expandButton = document.createElement('span');
+expandButton.classList.add('expandButton');
+article.appendChild(expandButton);
+
+
+/*
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
