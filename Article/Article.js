@@ -85,7 +85,18 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'WEPBT16 Cohort',
+    date: 'Apr 16th, 2020',
+    firstParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa placerat duis ultricies lacus sed turpis tincidunt id. Urna duis convallis convallis tellus id interdum velit. Bibendum at varius vel pharetra vel turpis nunc eget. In fermentum posuere urna nec tincidunt. Massa massa ultricies mi quis hendrerit dolor magna eget est. Nibh cras pulvinar mattis nunc. Scelerisque in dictum non consectetur a erat. Porta lorem mollis aliquam ut porttitor leo a diam. Quisque non tellus orci ac auctor augue mauris augue neque. Nec nam aliquam sem et tortor consequat. Rhoncus aenean vel elit scelerisque mauris.`,
+
+    secondParagraph: `Habitasse platea dictumst vestibulum rhoncus. Lacus luctus accumsan tortor posuere ac. Cras pulvinar mattis nunc sed blandit libero. Eu facilisis sed odio morbi. Viverra tellus in hac habitasse. Neque vitae tempus quam pellentesque nec nam aliquam. Pretium vulputate sapien nec sagittis. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci. Sed felis eget velit aliquet sagittis. Molestie nunc non blandit massa enim nec. Sagittis orci a scelerisque purus semper eget duis at. Imperdiet proin fermentum leo vel orci porta non pulvinar. Nulla facilisi cras fermentum odio. Volutpat lacus laoreet non curabitur gravida arcu ac tortor.`,
+
+    thirdParagraph: `Purus sit amet luctus venenatis lectus magna. Molestie at elementum eu facilisis sed odio morbi. Iaculis urna id volutpat lacus laoreet non. Consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a. Ut ornare lectus sit amet est placerat in egestas. Vestibulum rhoncus est pellentesque elit. At elementum eu facilisis sed. Amet justo donec enim diam vulputate ut pharetra sit. Mauris cursus mattis molestie a iaculis at erat pellentesque. Pellentesque nec nam aliquam sem. Massa massa ultricies mi quis hendrerit dolor magna eget est. Faucibus et molestie ac feugiat. Fringilla urna porttitor rhoncus dolor purus non enim praesent elementum. Non arcu risus quis varius quam quisque. In aliquam sem fringilla ut morbi. Pellentesque id nibh tortor id aliquet lectus.`
   }
+
+  //Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -102,63 +113,63 @@ const data = [
   Hint: You will need to use createElement more than once here!
  */ 
 
-function articleComponentCreator(articleTitle, articleDate, firstP, secondP, thirdP){
 
-let article = document.createElement('div');
+ //Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+const dataComponent = (titleText, dateText, firstParagraph, secondParagraph, thirdParagraph, fourthParagraph) => {
+
+const article = document.createElement('div');
 article.classList.add('article');
 
-let title = document.createElement('h2');
-title.textContent = articleTitle;
-article.appendChild(title);
+const title = document.createElement('h2');
+title.textContent = titleText;
 
-let date = document.createElement('p');
+const date = document.createElement('p');
 date.classList.add('date');
-date.textContent = articleDate;
-article.appendChild(date);
-
-let p1 = document.createElement('p');
-article.appendChild(p1);
-p1.textContent = firstP;
-
-let p2 = document.createElement('p');
-article.appendChild(p2);
-p2.textContent = secondP;
-
-let p3 = document.createElement('p');
-article.appendChild(p3);
-p3.textContent = thirdP;
+date.textContent = dateText;
 
 
-let expandButton = document.createElement('span');
+const firstP = document.createElement('p');
+firstP.textContent = firstParagraph;
+
+const secondP = document.createElement('p');
+secondP.textContent = secondParagraph;
+
+const thirdP = document.createElement('p');
+thirdP.textContent = thirdParagraph;
+
+const fourthP = document.createElement('p');
+fourthP.textContent = fourthParagraph;
+
+
+const expandButton = document.createElement('span');
 expandButton.classList.add('expandButton');
+expandButton.textContent = 'Click here';
 
-
-expandButton.addEventListener('click', (event) => {
+//Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+expandButton.addEventListener('click', () => {
   article.classList.toggle('article-open');
-})
+
+});
+
+//appendChildren
+article.appendChild(title);
+article.appendChild(date);
+article.appendChild(firstP);
+article.appendChild(secondP);
+article.appendChild(thirdP);
+article.appendChild(fourthP);
 article.appendChild(expandButton);
 
-
+//Step 3: return the entire component.
 return article;
 } 
 
-const articleContainer = document.querySelector('.articles');
+// under index.html - find class .articles
+const articles = document.querySelector('.articles');
 
+//Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+data.forEach((item) => {
+  const newArticle = dataComponent(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph);
+  articles.appendChild(newArticle);
+});
 
-data.forEach((obj) => {
-  const articleComponent = articleComponentCreator(obj.title, obj.date, obj.firstParagraph, obj.secondParagraph, obj.thirdParagraph);
-  articleContainer.appendChild(articleComponent);
-})
-
-/*
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
-
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-
-  Step 3: return the entire component.
-
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
-
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
-
-*/
